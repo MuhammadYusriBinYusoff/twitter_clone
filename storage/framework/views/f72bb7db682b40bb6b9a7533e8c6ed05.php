@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="EN">
 
@@ -24,7 +16,6 @@
 
 <body>
     <?php echo $__env->make('layout.nav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    
     <div class="container py-4">
         <div class="row">
             <div class="col-3">

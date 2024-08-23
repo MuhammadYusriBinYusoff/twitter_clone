@@ -1,38 +1,3 @@
-
-{{-- //==========Excersise 1 start =============== --}}
-{{-- <h1>Dashboard</h1>
-<?php //echo $users[0]['name']; ?>
-
-</br>
-//sdtandard php
-</br>
-<?php 
-
-// foreach ($users as $user) {
-//     echo $user['name'];
-//     echo $user['age'];
-// }
-
-
-
-?>
-
-</br>
-//use laravel method
-
-@foreach($users as $user)
-    <h1> {{$user['name']}} </h1>
-    <h2> {{$user['age']}} </h2>
-    @if($user['age']< 18)
-        <p> user can't drive </p>
-    @endIf
-    <hr>
-@endforeach --}}
-
-
-
-{{-- //=========Excersise 1 end =========== --}}
-
 <!DOCTYPE html>
 <html lang="EN">
 

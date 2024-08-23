@@ -26,9 +26,6 @@
                     <div class="form-group">
                         <label for="name" class="text-dark">Name:</label><br>
                         <input type="text" name="name" id="name" class="form-control">
-                        {{-- @error('name')
-                            <span class="d-block fs-6 text-danger mt-2">{{$message}}</span>
-                        @enderror --}}
                     </div>
                     <div class="form-group">
                         <label for="email" class="text-dark">Email:</label><br>
