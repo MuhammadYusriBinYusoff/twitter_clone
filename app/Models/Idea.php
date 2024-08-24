@@ -29,4 +29,8 @@ class Idea extends Model
         return $this->hasMany(Like::class, 'ideaId');
     }
 
+    public function isLikedBy(User $user) {
+        return $this->likes()->where('userId', $user->id)->exists();
+    }
+
 }

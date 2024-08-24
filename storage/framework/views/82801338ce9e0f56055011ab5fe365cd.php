@@ -2,24 +2,25 @@
     <div class="px-3 pt-4 pb-2">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-                <img style="width:50px" class="me-2 avatar-sm rounded-circle"
-                    src="<?php echo e($idea->user->getImageUrl()); ?>" alt="Mario Avatar">
+                <img style="width:50px" class="me-2 avatar-sm rounded-circle" src="<?php echo e($idea->user->getImageUrl()); ?>"
+                    alt="Mario Avatar">
                 <div>
-                    <h5 class="card-title mb-0"><a href="<?php echo e(route('users.show',$idea->user->id)); ?>"> <?php echo e($idea->user->name ?? 'Unknown User'); ?>
+                    <h5 class="card-title mb-0"><a href="<?php echo e(route('users.show', $idea->user->id)); ?>">
+                            <?php echo e($idea->user->name ?? 'Unknown User'); ?>
 
                         </a></h5>
                 </div>
             </div>
             <?php if(Auth::id() == $idea->user->id): ?>
-            <div>
-                <form action="<?php echo e(route('ideas.destroy', $idea->id)); ?>" method="post">
-                    <?php echo csrf_field(); ?>
-                    <?php echo method_field('delete'); ?>
-                    <a href= "<?php echo e(route('ideas.edit', $idea->id)); ?>"> Edit</a>
-                    <a href= "<?php echo e(route('ideas.show', $idea->id)); ?>"> View</a>
-                    <button class="btn btn-danger btn-sm">X</button>
-                </form>
-            </div>
+                <div>
+                    <form action="<?php echo e(route('ideas.destroy', $idea->id)); ?>" method="post">
+                        <?php echo csrf_field(); ?>
+                        <?php echo method_field('delete'); ?>
+                        <a href= "<?php echo e(route('ideas.edit', $idea->id)); ?>"> Edit</a>
+                        <a href= "<?php echo e(route('ideas.show', $idea->id)); ?>"> View</a>
+                        <button class="btn btn-danger btn-sm">X</button>
+                    </form>
+                </div>
             <?php endif; ?>
         </div>
     </div>
@@ -45,17 +46,17 @@
             </p>
         <?php endif; ?>
         <div class="d-flex justify-content-between">
-            
             <div>
                 <form action="<?php echo e(route('likes.store', $idea->id)); ?>" method="post" style="display:inline;">
                     <?php echo csrf_field(); ?>
-                    <button type="submit" class="btn btn-link fw-light nav-link fs-6">
-                        <span class="fas fa-heart me-1"></span> <?php echo e($idea->likes); ?>
+                    <button type="submit" class="btn btn-link fw-light nav-link fs-6" <?php echo e(auth()->check() ? '' : 'disabled'); ?>>
+                        <span class="fas fa-heart me-1"
+                            style="color: <?php echo e(auth()->check() && $idea->isLikedBy(auth()->user()) ? 'red' : 'gray'); ?>"></span>
+                        <?php echo e($idea->likes()->count()); ?>
 
                     </button>
                 </form>
-            </div>        
-            
+            </div>            
             <div>
                 <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
                     3-5-2023 </span>

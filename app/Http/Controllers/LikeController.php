@@ -11,12 +11,13 @@ class LikeController extends Controller
     public function store(Idea $idea)
     {   
 
-        // Add the ideaId and userId to the validated data
-        $validated['ideaId'] = $idea->id; // Assuming your foreign key column in comments table is `idea_id`
-        $validated['userId'] = auth()->id(); // Assuming your foreign key column in comments table is `user_id`
+        $user = auth()->user();
 
-        // Create the comment
-        Like::create($validated);
+        if (!$idea->isLikedBy($user)) {
+            $idea->likes()->create(['userId' => $user->id],['ideaId' => $idea->id]);
+        } else {
+            $idea->likes()->where('userId', $user->id)->delete();
+        }
 
         // Redirect back with a success message
         return redirect()->route('dashboard')->with('success', 'Like created successfully');
