@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Idea;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -41,7 +42,8 @@ class DashboardController extends Controller
             [ //---data yang nak digunakan untuk views
                 //'users' => $users
                 //'ideas' => Idea::all(),  //untuk retrieve all information
-                'ideas' => Idea::orderBy('created_at','DESC')->get()  //untuk susun the latest info yang masuk dalam created_at column at database //actually ideas here is variable
+                'ideas' => Idea::orderBy('created_at','DESC')->get(),  //untuk susun the latest info yang masuk dalam created_at column at database //actually ideas here is variable
+                'users' => User::orderBy('created_at','DESC')->get() 
             ]
         );
     }
