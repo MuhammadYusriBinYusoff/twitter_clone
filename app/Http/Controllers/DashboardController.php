@@ -37,12 +37,19 @@ class DashboardController extends Controller
         // $idea->likes = 0;
         // $idea->save(); //untuk insert dalam database
 
+        $ideas = Idea::orderBy('created_at','DESC');
+
+        if(request()->has('search')){
+            $ideas = $ideas->where('content', 'like', '%' . request()->get('search','') . '%');
+
+        }
+
         return view(
             'dashboard',
             [ //---data yang nak digunakan untuk views
                 //'users' => $users
                 //'ideas' => Idea::all(),  //untuk retrieve all information
-                'ideas' => Idea::orderBy('created_at','DESC')->get(),  //untuk susun the latest info yang masuk dalam created_at column at database //actually ideas here is variable
+                'ideas' => $ideas->get(),  //untuk susun the latest info yang masuk dalam created_at column at database //actually ideas here is variable
                 'users' => User::orderBy('created_at','DESC')->get() 
             ]
         );
